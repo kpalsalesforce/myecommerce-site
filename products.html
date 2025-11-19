@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Our Premium Cookware</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Cookware Co.</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>All Cookware Products</h1>
+        <div class="product-grid">
+            <!-- Product 1 --><div class="product-card">
+                <img src="https://via.placeholder.com/300x200/ff7f50/ffffff?text=Non-Stick+Pan" alt="Non-Stick Pan">
+                <h3>Premium Non-Stick Pan</h3>
+                <p class="price">$69.99</p>
+                <button class="quick-view-btn" data-product-id="1">Quick View</button>
+            </div>
+            <!-- Product 2 --><div class="product-card">
+                <img src="https://via.placeholder.com/300x200/6a5acd/ffffff?text=Pot+Set" alt="Stainless Steel Pot Set">
+                <h3>Stainless Steel Pot Set</h3>
+                <p class="price">$189.99</p>
+                <button class="quick-view-btn" data-product-id="2">Quick View</button>
+            </div>
+            <!-- Product 3 --><div class="product-card">
+                <img src="https://via.placeholder.com/300x200/a0522d/ffffff?text=Cast+Iron+Skillet" alt="Cast Iron Skillet">
+                <h3>Cast Iron Skillet</h3>
+                <p class="price">$49.99</p>
+                <button class="quick-view-btn" data-product-id="3">Quick View</button>
+            </div>
+            <!-- Product 4 --><div class="product-card">
+                <img src="https://via.placeholder.com/300x200/7cb342/ffffff?text=Ceramic+Baking+Dish" alt="Ceramic Baking Dish">
+                <h3>Ceramic Baking Dish</h3>
+                <p class="price">$34.99</p>
+                <button class="quick-view-btn" data-product-id="4">Quick View</button>
+            </div>
+            <!-- Product 5 --><div class="product-card">
+                <img src="https://via.placeholder.com/300x200/ffb74d/ffffff?text=Wok+Pan" alt="Wok Pan">
+                <h3>Carbon Steel Wok Pan</h3>
+                <p class="price">$79.99</p>
+                <button class="quick-view-btn" data-product-id="5">Quick View</button>
+            </div>
+            <!-- Product 6 --><div class="product-card">
+                <img src="https://via.placeholder.com/300x200/4fc3f7/ffffff?text=Griddle+Plate" alt="Griddle Plate">
+                <h3>Reversible Griddle Plate</h3>
+                <p class="price">$59.99</p>
+                <button class="quick-view-btn" data-product-id="6">Quick View</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Cookware Co. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Quick View Modal Structure --><div id="quickViewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-image">
+                <img id="modalProductImage" src="https://via.placeholder.com/300x200?text=Product+Image" alt="Product Image">
+            </div>
+            <div class="modal-details">
+                <h2 id="modalProductName">Product Name</h2>
+                <p class="price" id="modalProductPrice">$0.00</p>
+                <p id="modalProductDescription">Short product description goes here.</p>
+
+                <div class="modal-options">
+                    <label for="modalProductSize">Size:</label>
+                    <select id="modalProductSize">
+                        <!-- Options will be populated by JavaScript --></select>
+                </div>
+
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
