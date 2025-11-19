@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Our Premium Cookware</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Cookware Co.</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="checkout-form">
+            <h2>Complete Your Order</h2>
+            <form action="#" method="POST"> <!-- Action would be a backend endpoint in a real app --><h3>Shipping Information</h3>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Shipping Address</label>
+                    <input type="text" id="address" name="address" placeholder="Street Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="city" name="city" placeholder="City" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="state" name="state" placeholder="State/Province" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="zip" name="zip" placeholder="Zip/Postal Code" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" required>
+                </div>
+
+                <h3>Payment Information (Demo)</h3>
+                <p>
+                    For this demo, payment is simulated. In a real scenario, you'd integrate with a payment gateway.
+                </p>
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" name="cardNumber" placeholder="**** **** **** ****" required>
+                </div>
+                <div class="form-group">
+                    <label for="expiryDate">Expiry Date</label>
+                    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="***" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Place Order</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Cookware Co. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
