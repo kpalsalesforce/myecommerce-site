@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         name: 'Premium Non-Stick Pan',
                         price: 69.99,
                         description: 'A durable non-stick pan, perfect for everyday cooking. Even heat distribution for optimal results.',
-                        image: 'https://via.placeholder.com/300x200/ff7f50/ffffff?text=Pan+Quick+View',
+                        image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202529/0082/img12xl.jpg',
                         sizes: ['8-inch', '10-inch', '12-inch']
                     };
                     break;
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         name: 'Stainless Steel Pot Set',
                         price: 189.99,
                         description: 'A 5-piece set of high-quality stainless steel pots with glass lids. Induction ready.',
-                        image: 'https://via.placeholder.com/300x200/6a5acd/ffffff?text=Pot+Set+Quick+View',
+                        image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202524/0017/all-clad-d3-tri-ply-stainless-steel-10-piece-cookware-set-xl.jpg',
                         sizes: ['Small Set', 'Medium Set', 'Large Set']
                     };
                     break;
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         name: 'Cast Iron Skillet',
                         price: 49.99,
                         description: 'Pre-seasoned cast iron skillet for perfect searing and baking. A timeless kitchen essential.',
-                        image: 'https://via.placeholder.com/300x200/a0522d/ffffff?text=Skillet+Quick+View',
+                        image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202544/0019/img3xl.jpg',
                         sizes: ['6-inch', '8-inch', '10-inch', '12-inch']
                     };
                     break;
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         name: 'Unknown Product',
                         price: 0.00,
                         description: 'Product details are not available.',
-                        image: 'https://via.placeholder.com/300x200/cccccc/000000?text=No+Image',
+                        image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202521/0004/img271xl.jpg',
                         sizes: ['N/A']
                     };
             }
