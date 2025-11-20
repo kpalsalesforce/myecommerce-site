@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modalProductName').textContent = product.name;
         document.getElementById('modalProductPrice').textContent = `$${product.price.toFixed(2)}`;
         document.getElementById('modalProductDescription').textContent = product.description;
-        document.getElementById('modalProductImage').src = product.image;
-        document.getElementById('modalProductImage').alt = product.name;
+  //      document.getElementById('modalProductImage').src = product.image;
+  //      document.getElementById('modalProductImage').alt = product.name;
 
         // Clear existing options and add new ones (example: sizes)
         const sizeSelect = document.getElementById('modalProductSize');
