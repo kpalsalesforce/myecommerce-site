@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Product Data Map ---
-    // In a real application, this data would be fetched from a database or API.
     const PRODUCTS = {
         '1': {
             name: 'Premium Non-Stick Pan',
@@ -51,83 +50,74 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.close-button');
     const quickViewButtons = document.querySelectorAll('.quick-view-btn');
 
+    // --- Core Modal Control Logic ---
 
-    // Function to populate and open the modal based on Product ID
-    function openQuickViewModal(productId) {
-        const product = PRODUCTS[productId];
-
-        if (!product) {
-            console.error('Product not found for ID:', productId);
-            return;
-        }
-
-        document.getElementById('modalProductName').textContent = product.name;
-        document.getElementById('modalProductPrice').textContent = `$${product.price.toFixed(2)}`;
-        document.getElementById('modalProductDescription').textContent = product.description;
-        document.getElementById('modalProductImage').src = product.image;
-        document.getElementById('modalProductImage').alt = product.name;
-
-        // Populate options (e.g., sizes)
-        const sizeSelect = document.getElementById('modalProductSize');
-        sizeSelect.innerHTML = '';
-        product.sizes.forEach(size => {
-            const option = document.createElement('option');
-            option.value = size;
-            option.textContent = size;
-            sizeSelect.appendChild(option);
-        });
-
-        quickViewModal.style.display = 'flex'; // Use flex to center
-    }
-
-    // Function to close the modal and clear the URL hash
-    function closeQuickViewModal() {
-        quickViewModal.style.display = 'none';
-        // Clear the hash from the URL without reloading the page
-        if (window.location.hash) {
-            history.pushState("", document.title, window.location.pathname + window.location.search);
-        }
-    }
-
-    // Core logic: checks the URL hash and opens/closes the modal
-    function handleHashChange() {
+    // This function checks the hash and either opens or closes the modal.
+    function handleModalState() {
         const hash = window.location.hash;
+        
         if (hash.startsWith('#product-')) {
-            const productId = hash.substring(9); // Get ID after #product-
-            if (PRODUCTS[productId]) {
-                openQuickViewModal(productId);
-            } else {
-                // If ID is invalid, close the modal and clear hash
-                closeQuickViewModal();
+            const productId = hash.substring(9); 
+            const product = PRODUCTS[productId];
+
+            if (product) {
+                // 1. Found valid product ID in hash: Open the modal
+                document.getElementById('modalProductName').textContent = product.name;
+                document.getElementById('modalProductPrice').textContent = `$${product.price.toFixed(2)}`;
+                document.getElementById('modalProductDescription').textContent = product.description;
+                document.getElementById('modalProductImage').src = product.image;
+                document.getElementById('modalProductImage').alt = product.name;
+
+                // Populate options (e.g., sizes)
+                const sizeSelect = document.getElementById('modalProductSize');
+                sizeSelect.innerHTML = '';
+                product.sizes.forEach(size => {
+                    const option = document.createElement('option');
+                    option.value = size;
+                    option.textContent = size;
+                    sizeSelect.appendChild(option);
+                });
+
+                quickViewModal.style.display = 'flex';
+                return;
             }
-        } else {
-            // If hash is empty or doesn't match the pattern, ensure modal is closed
-            quickViewModal.style.display = 'none';
         }
+        
+        // 2. Hash is invalid, missing, or product not found: Close the modal
+        quickViewModal.style.display = 'none';
     }
 
 
-    // 1. Event listener for Quick View buttons: update the URL hash
+    // --- Event Handlers ---
+
+    // 1. Button click sets the hash, which triggers the hashchange listener.
     quickViewButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
             const productId = event.target.dataset.productId;
-            // Change the URL hash, which triggers the hashchange listener (below)
             window.location.hash = `product-${productId}`;
         });
     });
 
-    // 2. Event listener for the close button and outside clicks: close and clear hash
-    closeButton.addEventListener('click', closeQuickViewModal);
+    // 2. Close button or background click clears the hash, which triggers the hashchange listener.
+    function clearHashAndClose() {
+        // Clear the hash without causing a page reload
+        history.pushState("", document.title, window.location.pathname + window.location.search);
+        // Explicitly call the handler just in case the hashchange event doesn't fire immediately
+        handleModalState();
+    }
+    
+    closeButton.addEventListener('click', clearHashAndClose);
 
     window.addEventListener('click', (event) => {
         if (event.target === quickViewModal) {
-            closeQuickViewModal();
+            clearHashAndClose();
         }
     });
 
-    // 3. Initial check on page load and listener for hash changes
-    // This allows the modal to open immediately if the page is loaded with a URL like products.html#product-1
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
+    // 3. Main hash change listener: Re-run the core logic whenever the hash changes (including back button usage).
+    window.addEventListener('hashchange', handleModalState);
+
+    // 4. Initial call: Check the hash when the page first loads (products.html#product-1)
+    handleModalState();
 });
