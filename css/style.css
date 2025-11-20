@@ -403,23 +403,3 @@ footer {
         flex-direction: column;
     }
 }
-.chat-container {
-    /* 1. Sizing and Positioning */
-    width: 380px; /* Standard width for a mobile-like chat column */
-    height: 550px; /* Standard height for a comfortable messaging view */
-    position: fixed; /* Keep it in the viewport even when scrolling */
-    bottom: 20px; /* Position 20px up from the bottom edge of the browser */
-    right: 20px; /* Position 20px left from the right edge of the browser */
-    
-    /* 2. Appearance */
-    background-color: #ffffff; /* White background for the chat area */
-    border: 1px solid #e0e0e0; /* Subtle border */
-    border-radius: 12px; /* Slightly rounded corners for a modern look */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow to lift it off the page */
-    
-    /* 3. Content Handling */
-    overflow: hidden; /* Important: Ensures the chat widget's content stays inside the container */
-    
-    /* 4. Layering (Optional but recommended) */
-    z-index: 1000; /* Ensure the chat container sits above other page elements */
-}
