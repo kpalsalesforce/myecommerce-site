@@ -106,12 +106,12 @@
 <script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 <script type='text/javascript'>
 	  // In this example, we will send a message once bot has joined the conversation.
-  window.addEventListener("onEmbeddedMessagingFirstBotMessageSent", (event) => {
+  window.addEventListener("onEmbeddedMessageLinkClicked", (event) => {
     console.log("Received the onEmbeddedMessagingFirstBotMessageSent event…")
     sendMessage();
   });
   function sendMessage() {
-    embeddedservice_bootstrap.utilAPI.sendTextMessage("Text");
+    embeddedservice_bootstrap.utilAPI.sendTextMessage("Sending Text from Outside");
       .then(() => {
         // Success handler used to perform actions when the message is sent successfully.
         // For example, create a method that logs the message was successfull.
