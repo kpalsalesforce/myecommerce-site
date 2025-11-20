@@ -102,6 +102,9 @@
 			console.error('Error loading Embedded Messaging: ', err);
 		}
 	};
+</script>
+<script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+<script type='text/javascript'>
 	  // In this example, we will send a message once bot has joined the conversation.
   window.addEventListener("onEmbeddedMessagingFirstBotMessageSent", (event) => {
     console.log("Received the onEmbeddedMessagingFirstBotMessageSent event…")
@@ -125,6 +128,5 @@
       });
   }
 </script>
-<script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 </body>
 </html>
