@@ -13,35 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Stainless Steel Pot Set',
             price: 189.99,
             description: 'A 5-piece set of high-quality stainless steel pots with glass lids. Induction ready.',
-            image: 'https://via.placeholder.com/300x200/6a5acd/ffffff?text=Pot+Set+Quick+View',
+            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202524/0017/all-clad-d3-tri-ply-stainless-steel-10-piece-cookware-set-xl.jpg',
             sizes: ['Small Set', 'Medium Set', 'Large Set']
         },
         '3': {
             name: 'Cast Iron Skillet',
             price: 49.99,
             description: 'Pre-seasoned cast iron skillet for perfect searing and baking. A timeless kitchen essential.',
-            image: 'https://via.placeholder.com/300x200/a0522d/ffffff?text=Skillet+Quick+View',
+            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202544/0019/img3xl.jpg',
             sizes: ['6-inch', '8-inch', '10-inch', '12-inch']
         },
         '4': {
             name: 'Ceramic Baking Dish',
             price: 34.99,
             description: 'Elegant ceramic dish for casseroles and desserts. Oven and microwave safe.',
-            image: 'https://via.placeholder.com/300x200/7cb342/ffffff?text=Ceramic+Baking+Dish',
+            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202521/0004/img271xl.jpg',
             sizes: ['Small', 'Medium', 'Large']
         },
         '5': {
             name: 'Carbon Steel Wok Pan',
             price: 79.99,
             description: 'High-heat wok for authentic stir-frying. Requires seasoning for best non-stick results.',
-            image: 'https://via.placeholder.com/300x200/ffb74d/ffffff?text=Wok+Pan',
+            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202524/0016/img9xl.jpg',
             sizes: ['12-inch', '14-inch']
         },
         '6': {
             name: 'Reversible Griddle Plate',
             price: 59.99,
             description: 'Cast iron griddle, flat on one side, ridged on the other. Ideal for pancakes, bacon, and grilled sandwiches.',
-            image: 'https://via.placeholder.com/300x200/4fc3f7/ffffff?text=Griddle+Plate',
+            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202538/0141/img15xl.jpg',
             sizes: ['Standard', 'Large']
         },
     };
