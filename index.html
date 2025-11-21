@@ -105,6 +105,35 @@
 					scrt2URL: 'https://storm-e18cb78cc5e405.my.salesforce-scrt.com'
 				}
 			);
+			embeddedservice_bootstrap.utilAPI.sendTextMessage("This is a user message!", [
+			{
+			      "name": "_AgentContext",
+			      "value": {
+			         "valueType": "StructuredValue",
+			         "value": {
+			             "currentPage": "page2",
+			             "search": {
+			               "result": "result2",
+			               "filters": [
+			                 "filter1",
+			                 "filter2"
+			               ],
+			               "facets": [
+			                 "facet1",
+			                 "facet2"
+			               ]
+			             }
+			         }
+			      }
+			   }
+			])
+			.then(() => {
+			    console.log("Successfully sent text message.");	
+			})
+			.catch((error) => {
+			    console.log("Error thrown while sending text message." + error);
+			});
+
 		} catch (err) {
 			console.error('Error loading Embedded Messaging: ', err);
 		}
