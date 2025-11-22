@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Execute the required sendTextMessage function
             embeddedservice_bootstrap.utilAPI.sendTextMessage(
-                `I am interested in the ${productName} (Size: ${productSize}) and would like assistance with checkout.`, 
+                `I am interested in the ${productName} (Size: ${productSize}).`, 
                 [agentContext]
             )
             .then(() => {
