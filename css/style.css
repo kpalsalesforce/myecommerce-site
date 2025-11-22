@@ -308,7 +308,7 @@ footer {
 .modal-content {
     background-color: #fefefe;
     /* Use calc for height to account for potential header/footer if they were fixed */
-    height: 80vh; /* Full viewport height */
+    height: 100vh; /* Full viewport height */
     width: 380px; /* Fixed width for the chat panel */
     max-width: 90vw; /* Max width for smaller screens */
     padding: 1.5rem; /* Reduced padding for a sleeker look */
