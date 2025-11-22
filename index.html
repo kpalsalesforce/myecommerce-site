@@ -80,7 +80,7 @@
 			 <div class="chat-container"></div>
 		 </section>	
 <button id="launchChatButton" onclick="launchChat()">Click to contact support</button>
-<button id="launchChatButton" onclick="sendMessage()">Send Message to Agent</button>
+<button id="sendmessagebtn" onclick="sendMessage()">Send Message to Agent</button>
     </main>
 
     <footer>
@@ -150,10 +150,10 @@
 </script>
 <script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 <script>
-  window.addEventListener("onEmbeddedMessagingFirstBotMessageSent", (event) => {
+/*  window.addEventListener("onEmbeddedMessagingFirstBotMessageSent", (event) => {
     console.log("Received the onEmbeddedMessagingFirstBotMessageSent event…")
     sendMessage();
-  });
+  });*/
   function sendMessage() {
     embeddedservice_bootstrap.utilAPI.sendTextMessage("Sending Text from Outside");
       .then(() => {
@@ -175,11 +175,11 @@
   }
 </script>
 <script>
-	window.addEventListener("onEmbeddedMessagingConversationStarted", (event) => {
+/*	window.addEventListener("onEmbeddedMessagingConversationStarted", (event) => {
 	  console.log("Received the onEmbeddedMessagingConversationStarted event…");
 	  console.log("Event detail: ", event.detail);
         sendMessage();
-	});
+	});*/
 </script>
 <script>
     function launchChat() {
