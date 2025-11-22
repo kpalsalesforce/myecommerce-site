@@ -283,7 +283,7 @@ footer {
     margin-top: 2rem;
 }
 
-/* --- MODAL (Quick View) - NEW STYLES FOR CHAT-LIKE PANEL --- */
+/* --- MODAL (Quick View) - UPDATED STYLES FOR TOP/BOTTOM SPACING --- */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -294,8 +294,7 @@ footer {
     height: 100%; /* Full height */
     overflow: hidden; /* Prevent body scroll when modal is open */
     background-color: rgba(0,0,0,0.6); /* Dark overlay for background */
-    justify-content: flex-end; /* Align content to the right */
-    align-items: flex-start; /* Align content to the top (vertically) */
+    /* Remove flex properties here, as .modal-content is now position: fixed */
     pointer-events: none; /* Allow clicks on underlying elements when not shown */
     transition: background-color 0.3s ease; /* Smooth overlay transition */
 }
@@ -307,39 +306,45 @@ footer {
 
 .modal-content {
     background-color: #fefefe;
-    /* Use calc for height to account for potential header/footer if they were fixed */
-    height: 100vh; /* Full viewport height */
-    width: 380px; /* Fixed width for the chat panel */
-    max-width: 90vw; /* Max width for smaller screens */
-    padding: 1.5rem; /* Reduced padding for a sleeker look */
-    border: none; /* No border for a cleaner panel look */
-    border-left: 1px solid #ddd; /* Subtle left border */
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Shadow to make it pop out */
-    position: relative;
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    gap: 1rem; /* Space between elements */
-    overflow-y: auto; /* Allow scrolling within the modal content */
+    
+    /* Use fixed positioning to control exact placement */
+    position: fixed;
+    top: 20px; /* 20px spacing from the top edge */
+    bottom: 20px; /* 20px spacing from the bottom edge */
+    right: -400px; /* Start position: Hidden (width 380px + margin/gap 20px) */
 
-    /* Slide-in animation from the right */
-    transform: translateX(100%);
-    transition: transform 0.3s ease-out;
+    height: calc(100vh - 40px); /* Height calculated based on top/bottom margins (40px total) */
+    width: 380px; /* Fixed width for the panel */
+    max-width: 90vw; 
+    padding: 1.5rem; 
+    border: none; 
+    border-left: 1px solid #ddd; 
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1); 
+    
+    /* Internal layout */
+    display: flex;
+    flex-direction: column; 
+    gap: 1rem; 
+    overflow-y: auto; /* Allow scrolling within the modal content */
+    
+    /* Animation transition property */
+    transition: right 0.3s ease-out; 
 }
 
-/* Show modal content by sliding it in */
+/* Show modal content by sliding it in to 20px from the right edge */
 .modal[style*="display: flex"] .modal-content {
-    transform: translateX(0);
+    right: 20px; 
 }
 
 .close-button {
     color: #888;
     position: absolute;
-    top: 15px; /* Adjust position */
-    right: 15px; /* Adjust position */
-    font-size: 2rem; /* Larger for better tap target */
-    font-weight: normal; /* Less bold */
+    top: 15px; 
+    right: 15px; 
+    font-size: 2rem; 
+    font-weight: normal; 
     cursor: pointer;
-    z-index: 10; /* Ensure it's above other content */
+    z-index: 10; 
 }
 
 .close-button:hover,
@@ -348,7 +353,6 @@ footer {
 }
 
 .modal-image {
-    /* Removed flex properties, now just takes full available width */
     width: 100%;
     margin-bottom: 1rem;
 }
@@ -359,28 +363,27 @@ footer {
 }
 
 .modal-details {
-    /* Removed flex properties, now just takes full available width */
     width: 100%;
     display: flex;
-    flex-direction: column; /* Ensure details stack vertically */
+    flex-direction: column; 
     gap: 0.5rem;
 }
 
 .modal-details h2 {
-    font-size: 1.8rem; /* Slightly smaller for panel */
-    margin-bottom: 0.2rem; /* Reduced margin */
+    font-size: 1.8rem; 
+    margin-bottom: 0.2rem; 
     color: #333;
 }
 .modal-details .price {
-    font-size: 1.3rem; /* Slightly smaller */
+    font-size: 1.3rem; 
     font-weight: bold;
     color: #007bff;
-    margin-bottom: 0.8rem; /* Reduced margin */
+    margin-bottom: 0.8rem; 
 }
 .modal-details p {
     margin-bottom: 1rem;
     color: #555;
-    font-size: 0.95rem; /* Slightly smaller font */
+    font-size: 0.95rem; 
 }
 
 .modal-options label {
@@ -400,7 +403,7 @@ footer {
     /* Ensure button is full width */
     width: 100%; 
     text-align: center;
-    margin-top: 1rem; /* Add some space above the button */
+    margin-top: 1rem; 
 }
 
 
@@ -415,7 +418,7 @@ footer {
     }
 
     nav ul {
-        flex-direction: column; /* Stack navigation items */
+        flex-direction: column; 
         width: 100%;
         text-align: center;
         margin-top: 1rem;
@@ -430,11 +433,18 @@ footer {
         flex-direction: column;
     }
 
-    /* Adjust modal for smaller screens, make it take more width */
+    /* Adjust modal for smaller screens: full height, full width, no top/bottom margin */
     .modal-content {
-        width: 100vw; /* Take full width on very small screens */
+        width: 100vw; 
         max-width: 100vw;
-        border-left: none; /* No border if it takes full width */
-        box-shadow: none; /* No side shadow if it takes full width */
+        border-left: none; 
+        box-shadow: none; 
+        top: 0;
+        bottom: 0;
+        right: -100vw; /* Start position off screen */
+        height: 100vh;
+    }
+    .modal[style*="display: flex"] .modal-content {
+        right: 0; /* End position right at the edge */
     }
 }
