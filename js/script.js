@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Premium Non-Stick Pan',
             price: 69.99,
             description: 'A durable non-stick pan, perfect for everyday cooking. Even heat distribution for optimal results.',
-            image: 'https://via.placeholder.com/300x200/ff7f50/ffffff?text=Pan+Quick+View',
+            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202529/0082/img12xl.jpg',
             sizes: ['8-inch', '10-inch', '12-inch']
         },
         '2': {
