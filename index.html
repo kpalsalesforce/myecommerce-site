@@ -133,7 +133,19 @@
         logMessageAttempt();
       });
 	
-  }
+  };
+ embeddedservice_bootstrap.utilAPI
+  .launchChat()
+  .then(function (success) {
+    // Add actions to run after the chat client launches successfully.
+  })
+  .catch(function (error) {
+    // Add actions to run after the chat client launch fails.
+  })
+  .finally(function () {
+    // Add actions to run whether the chat client launches
+    // successfully or not.
+  });
 </script>
 </body>
 </html>
