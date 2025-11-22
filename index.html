@@ -113,47 +113,8 @@
 		}
 	};
 </script>
-<script>
-	window.addEventListener("onEmbeddedMessagingReady", () => {
-    console.log("Embedded Messaging is ready.");
-    
-    // Send text message with context data
-    embeddedservice_bootstrap.utilAPI.sendTextMessage("This is a user message!", [
-        {
-            "name": "_AgentContext",
-            "value": {
-                "valueType": "StructuredValue",
-                "value": {
-                    "currentPage": "page2",
-                    "search": {
-                        "result": "result2",
-                        "filters": [
-                            "filter1",
-                            "filter2"
-                        ],
-                        "facets": [
-                            "facet1",
-                            "facet2"
-                        ]
-                    }
-                }
-            }
-        }
-    ])
-    .then(() => {
-        console.log("Successfully sent text message.");
-    })
-    .catch((error) => {
-        console.log("Error thrown while sending text message." + error);
-    });
-});
-</script>
 <script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-<script>
-/*  window.addEventListener("onEmbeddedMessagingFirstBotMessageSent", (event) => {
-    console.log("Received the onEmbeddedMessagingFirstBotMessageSent event…")
-    sendMessage();
-  });*/
+<script type='text/javascript'>
   function sendMessage() {
     embeddedservice_bootstrap.utilAPI.sendTextMessage("Sending Text from Outside");
       .then(() => {
@@ -173,13 +134,6 @@
       });
 	
   }
-</script>
-<script>
-/*	window.addEventListener("onEmbeddedMessagingConversationStarted", (event) => {
-	  console.log("Received the onEmbeddedMessagingConversationStarted event…");
-	  console.log("Event detail: ", event.detail);
-        sendMessage();
-	});*/
 </script>
 <script>
     function launchChat() {
