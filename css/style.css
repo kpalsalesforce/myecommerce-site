@@ -283,7 +283,7 @@ footer {
     margin-top: 2rem;
 }
 
-/* Modal (Quick View) */
+/* --- MODAL (Quick View) - NEW STYLES FOR CHAT-LIKE PANEL --- */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -292,47 +292,65 @@ footer {
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-    justify-content: center;
-    align-items: center;
+    overflow: hidden; /* Prevent body scroll when modal is open */
+    background-color: rgba(0,0,0,0.6); /* Dark overlay for background */
+    justify-content: flex-end; /* Align content to the right */
+    align-items: flex-start; /* Align content to the top (vertically) */
+    pointer-events: none; /* Allow clicks on underlying elements when not shown */
+    transition: background-color 0.3s ease; /* Smooth overlay transition */
+}
+
+/* When the modal is active, allow pointer events and change background */
+.modal[style*="display: flex"] {
+    pointer-events: auto;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: auto;
-    padding: 2rem;
-    border: 1px solid #888;
-    width: 90%;
-    max-width: 600px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    /* Use calc for height to account for potential header/footer if they were fixed */
+    height: 100vh; /* Full viewport height */
+    width: 380px; /* Fixed width for the chat panel */
+    max-width: 90vw; /* Max width for smaller screens */
+    padding: 1.5rem; /* Reduced padding for a sleeker look */
+    border: none; /* No border for a cleaner panel look */
+    border-left: 1px solid #ddd; /* Subtle left border */
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Shadow to make it pop out */
     position: relative;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    flex-direction: column; /* Stack content vertically */
+    gap: 1rem; /* Space between elements */
+    overflow-y: auto; /* Allow scrolling within the modal content */
+
+    /* Slide-in animation from the right */
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+}
+
+/* Show modal content by sliding it in */
+.modal[style*="display: flex"] .modal-content {
+    transform: translateX(0);
 }
 
 .close-button {
-    color: #aaa;
+    color: #888;
     position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
+    top: 15px; /* Adjust position */
+    right: 15px; /* Adjust position */
+    font-size: 2rem; /* Larger for better tap target */
+    font-weight: normal; /* Less bold */
     cursor: pointer;
+    z-index: 10; /* Ensure it's above other content */
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+    color: #333;
 }
 
 .modal-image {
-    flex: 1;
-    min-width: 200px;
+    /* Removed flex properties, now just takes full available width */
+    width: 100%;
+    margin-bottom: 1rem;
 }
 .modal-image img {
     max-width: 100%;
@@ -341,24 +359,28 @@ footer {
 }
 
 .modal-details {
-    flex: 2;
-    min-width: 250px;
+    /* Removed flex properties, now just takes full available width */
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Ensure details stack vertically */
+    gap: 0.5rem;
 }
 
 .modal-details h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.8rem; /* Slightly smaller for panel */
+    margin-bottom: 0.2rem; /* Reduced margin */
     color: #333;
 }
 .modal-details .price {
-    font-size: 1.5rem;
+    font-size: 1.3rem; /* Slightly smaller */
     font-weight: bold;
     color: #007bff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem; /* Reduced margin */
 }
 .modal-details p {
     margin-bottom: 1rem;
     color: #555;
+    font-size: 0.95rem; /* Slightly smaller font */
 }
 
 .modal-options label {
@@ -373,6 +395,14 @@ footer {
     border-radius: 4px;
     margin-bottom: 1rem;
 }
+
+.modal-content .add-to-cart-btn {
+    /* Ensure button is full width */
+    width: 100%; 
+    text-align: center;
+    margin-top: 1rem; /* Add some space above the button */
+}
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -399,7 +429,12 @@ footer {
     .product-detail {
         flex-direction: column;
     }
+
+    /* Adjust modal for smaller screens, make it take more width */
     .modal-content {
-        flex-direction: column;
+        width: 100vw; /* Take full width on very small screens */
+        max-width: 100vw;
+        border-left: none; /* No border if it takes full width */
+        box-shadow: none; /* No side shadow if it takes full width */
     }
 }
