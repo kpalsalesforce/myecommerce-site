@@ -88,7 +88,27 @@
             <p>&copy; 2023 Cookware Co. All rights reserved.</p>
         </div>
     </footer>
-
+<script>
+ function sendMessage() {
+    embeddedservice_bootstrap.utilAPI.sendTextMessage("Sending Text from Outside");
+      .then(() => {
+        // Success handler used to perform actions when the message is sent successfully.
+        // For example, create a method that logs the message was successfull.
+        logMessageSuccessfullySent();
+      }).catch(() => {
+        // Error handler used to perform actions if the message fails to send.
+        // For example, log the failure.
+		console.error("Error sending message:", error);
+        logMessageFailed();
+      }).finally(() => {
+        // Finally handler used to perform any clean-up actions
+        // regardless of whether the message was successfully sent or not.
+        // For example, create a method that logs attempt to send message.
+        logMessageAttempt();
+      });
+	
+  }
+</script>
 <script src="js/script.js"></script>
 <script type='text/javascript'>
 	function initEmbeddedMessaging() {
@@ -114,26 +134,5 @@
 	};
 </script>
 <script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-<script>
- function sendMessage() {
-    embeddedservice_bootstrap.utilAPI.sendTextMessage("Sending Text from Outside");
-      .then(() => {
-        // Success handler used to perform actions when the message is sent successfully.
-        // For example, create a method that logs the message was successfull.
-        logMessageSuccessfullySent();
-      }).catch(() => {
-        // Error handler used to perform actions if the message fails to send.
-        // For example, log the failure.
-		console.error("Error sending message:", error);
-        logMessageFailed();
-      }).finally(() => {
-        // Finally handler used to perform any clean-up actions
-        // regardless of whether the message was successfully sent or not.
-        // For example, create a method that logs attempt to send message.
-        logMessageAttempt();
-      });
-	
-  }
-</script>
 </body>
 </html>
