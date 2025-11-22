@@ -80,7 +80,7 @@
 			 <div class="chat-container"></div>
 		 </section>	
 <button id="launchChatButton" onclick="launchChat()">Click to contact support</button>
-<button id="sendmessagebtn" onclick="crossMessage()">Send Message to Agent</button>
+<button id="sendmessagebtn" onclick="sendTextMessage()">Send Message to Agent</button>
     </main>
 
     <footer>
@@ -115,7 +115,7 @@
 </script>
 <script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 <script>
- function crossMessage() {
+ function sendTextMessage() {
     embeddedservice_bootstrap.utilAPI.sendTextMessage("Sending Text from Outside");
       .then(() => {
         // Success handler used to perform actions when the message is sent successfully.
