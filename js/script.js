@@ -6,42 +6,42 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Premium Non-Stick Pan',
             price: 69.99,
             description: 'A durable non-stick pan, perfect for everyday cooking. Even heat distribution for optimal results.',
-            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202529/0082/img12xl.jpg',
+            image: 'https://via.placeholder.com/300x200/ff7f50/ffffff?text=Pan+Quick+View',
             sizes: ['8-inch', '10-inch', '12-inch']
         },
         '2': {
             name: 'Stainless Steel Pot Set',
             price: 189.99,
             description: 'A 5-piece set of high-quality stainless steel pots with glass lids. Induction ready.',
-            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202524/0017/all-clad-d3-tri-ply-stainless-steel-10-piece-cookware-set-xl.jpg',
+            image: 'https://via.placeholder.com/300x200/6a5acd/ffffff?text=Pot+Set+Quick+View',
             sizes: ['Small Set', 'Medium Set', 'Large Set']
         },
         '3': {
             name: 'Cast Iron Skillet',
             price: 49.99,
             description: 'Pre-seasoned cast iron skillet for perfect searing and baking. A timeless kitchen essential.',
-            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202544/0019/img3xl.jpg',
+            image: 'https://via.placeholder.com/300x200/a0522d/ffffff?text=Skillet+Quick+View',
             sizes: ['6-inch', '8-inch', '10-inch', '12-inch']
         },
         '4': {
             name: 'Ceramic Baking Dish',
             price: 34.99,
             description: 'Elegant ceramic dish for casseroles and desserts. Oven and microwave safe.',
-            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202521/0004/img271xl.jpg',
+            image: 'https://via.placeholder.com/300x200/7cb342/ffffff?text=Ceramic+Baking+Dish',
             sizes: ['Small', 'Medium', 'Large']
         },
         '5': {
             name: 'Carbon Steel Wok Pan',
             price: 79.99,
             description: 'High-heat wok for authentic stir-frying. Requires seasoning for best non-stick results.',
-            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202524/0016/img9xl.jpg',
+            image: 'https://via.placeholder.com/300x200/ffb74d/ffffff?text=Wok+Pan',
             sizes: ['12-inch', '14-inch']
         },
         '6': {
             name: 'Reversible Griddle Plate',
             price: 59.99,
             description: 'Cast iron griddle, flat on one side, ridged on the other. Ideal for pancakes, bacon, and grilled sandwiches.',
-            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202538/0141/img15xl.jpg',
+            image: 'https://via.placeholder.com/300x200/4fc3f7/ffffff?text=Griddle+Plate',
             sizes: ['Standard', 'Large']
         },
     };
@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const quickViewModal = document.getElementById('quickViewModal');
     const closeButton = document.querySelector('.close-button');
     const quickViewButtons = document.querySelectorAll('.quick-view-btn');
+    const addToCartButton = document.querySelector('.modal-content .add-to-cart-btn'); // New: Select the Add to Cart button in the modal
 
     // --- Core Modal Control Logic ---
 
@@ -78,6 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     sizeSelect.appendChild(option);
                 });
 
+                // Store current product ID on the button for use in sendTextMessage
+                addToCartButton.dataset.currentProductId = productId;
+
                 quickViewModal.style.display = 'flex';
                 return;
             }
@@ -99,7 +103,68 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. Close button or background click clears the hash, which triggers the hashchange listener.
+    // 2. Add to Cart Button Click Handler (Custom function call)
+    addToCartButton.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        // Get current product details from the modal UI
+        const productId = addToCartButton.dataset.currentProductId;
+        const productName = document.getElementById('modalProductName').textContent;
+        const productSize = document.getElementById('modalProductSize').value;
+
+        // Construct the AgentContext object
+        const agentContext = {
+            "name": "_AgentContext",
+            "value": {
+                "valueType": "StructuredValue",
+                "value": {
+                    // Update currentPage to reflect the product being viewed
+                    "currentPage": `products.html#product-${productId} (${productName})`,
+                    "search": {
+                        "result": "result2",
+                        "filters": [
+                            "filter1",
+                            "filter2"
+                        ],
+                        "facets": [
+                            "facet1",
+                            "facet2"
+                        ]
+                    },
+                    // Add current product selection details
+                    "productSelection": {
+                        "id": productId,
+                        "name": productName,
+                        "size": productSize
+                    }
+                }
+            }
+        };
+
+        // Check if the external service API is available before calling
+        if (typeof embeddedservice_bootstrap !== 'undefined' && embeddedservice_bootstrap.utilAPI) {
+            
+            // Execute the required sendTextMessage function
+            embeddedservice_bootstrap.utilAPI.sendTextMessage(
+                `I am interested in the ${productName} (Size: ${productSize}) and would like assistance with checkout.`, 
+                [agentContext]
+            )
+            .then(() => {
+                console.log("Successfully sent text message for product ID: " + productId);	
+                // Optional: Provide UI feedback (e.g., closing modal or confirmation message)
+                alert("Product details sent for assistance! (Check Console Log)");
+                clearHashAndClose();
+            })
+            .catch((error) => {
+                console.error("Error thrown while sending text message: ", error);
+            });
+        } else {
+            console.warn("embeddedservice_bootstrap API not found. The message could not be sent.");
+            alert("API not found. Check console for details.");
+        }
+    });
+
+    // 3. Close button or background click clears the hash, which triggers the hashchange listener.
     function clearHashAndClose() {
         // Clear the hash without causing a page reload
         history.pushState("", document.title, window.location.pathname + window.location.search);
@@ -115,9 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Main hash change listener: Re-run the core logic whenever the hash changes (including back button usage).
+    // 4. Main hash change listener: Re-run the core logic whenever the hash changes (including back button usage).
     window.addEventListener('hashchange', handleModalState);
 
-    // 4. Initial call: Check the hash when the page first loads (products.html#product-1)
+    // 5. Initial call: Check the hash when the page first loads (products.html#product-1)
     handleModalState();
 });
