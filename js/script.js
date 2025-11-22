@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(() => {
                 console.log("Successfully sent text message for product ID: " + productId);	
                 // Optional: Provide UI feedback (e.g., closing modal or confirmation message)
-                alert("Product details sent for assistance! (Check Console Log)");
+           //     alert("Product details sent for assistance! (Check Console Log)");
                 clearHashAndClose();
             })
             .catch((error) => {
