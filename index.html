@@ -24,7 +24,7 @@
 
     <main>
         <section class="hero">
-            <h1>Elevate Your Kitchen Experience4</h1>
+            <h1>Elevate Your Kitchen Experience5</h1>
             <p>Discover our exquisite collection of premium cookware designed for every culinary adventure.</p>
             <a href="products.html" class="btn">Shop Now</a>
         </section>
@@ -80,6 +80,7 @@
 			 <div class="chat-container"></div>
 		 </section>	
 <button id="launchChatButton" onclick="launchChat()">Click to contact support</button>
+<button id="launchChatButton" onclick="sendMessage()">Send Message to Agent</button>
     </main>
 
     <footer>
@@ -181,7 +182,7 @@
 </script>
 <script>
     function launchChat() {
-/*        embeddedservice_bootstrap.utilAPI.launchChat()
+        embeddedservice_bootstrap.utilAPI.launchChat()
             .then(() => {
                 // Success handler used to perform actions
                 // when the chat client launches successfully.
@@ -198,22 +199,7 @@
                 // For example, create a method that logs the user’s attempt to chat.
                 logEndUserAttemptToChat();
             });
-*/
-		    embeddedservice_bootstrap.utilAPI.sendTextMessage("Sending Text from Outside");
-      .then(() => {
-        // Success handler used to perform actions when the message is sent successfully.
-        // For example, create a method that logs the message was successfull.
-        logMessageSuccessfullySent();
-      }).catch(() => {
-        // Error handler used to perform actions if the message fails to send.
-        // For example, log the failure.
-        logMessageFailed();
-      }).finally(() => {
-        // Finally handler used to perform any clean-up actions
-        // regardless of whether the message was successfully sent or not.
-        // For example, create a method that logs attempt to send message.
-        logMessageAttempt();
-      });
+
     }
 </script>
 </body>
