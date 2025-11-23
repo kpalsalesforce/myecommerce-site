@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.close-button');
     const quickViewButtons = document.querySelectorAll('.quick-view-btn');
     const addToCartButton = document.querySelector('.modal-content .add-to-cart-btn'); // New: Select the Add to Cart button in the modal
-    const queryButton = document.querySelector('.query-button'); // query button
 
     // --- Core Modal Control Logic ---
 
@@ -188,52 +187,37 @@ document.addEventListener('DOMContentLoaded', () => {
     handleModalState();
 
     // 6. Query button logic
-     queryButton.addEventListener('click', (event) => {
-        event.preventDefault();
+    const queryButtons = document.querySelectorAll('.query-button');
 
-                 // Construct the AgentContext object
-        const agentContext = {
-            "name": "_AgentContext",
-            "value": {
-                "valueType": "StructuredValue",
-                "value": {
-                    // Update currentPage to reflect the product being viewed
-                    "currentPage": `Product Deatail`,
-                    "search": {
-                        "result": "result2",
-                        "filters": [
-                            "filter1",
-                            "filter2"
-                        ],
-                        "facets": [
-                            "facet1",
-                            "facet2"
-                        ]
-                    }
-                }
-            }
-        };
+    queryButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+            event.preventDefault();
 
-        // Check if the external service API is available before calling
-        if (typeof embeddedservice_bootstrap !== 'undefined' && embeddedservice_bootstrap.utilAPI) {
+            // Extract the text of the button (remove the sparkle icon text if present)
+            // We use button.textContent and trim it to get the clean question.
+            const rawText = button.textContent || button.dataset.question;
+            const messageText = rawText.replace('✨', '').trim(); 
             
-            // Execute the required sendTextMessage function
-            embeddedservice_bootstrap.utilAPI.sendTextMessage(
-                `Is it dishwasher safe?`, 
-                [agentContext]
-            )
-            .then(() => {
-                console.log("Sent the dishwasher Sage message ");	
-                // Optional: Provide UI feedback (e.g., closing modal or confirmation message)
-           //     alert("Product details sent for assistance! (Check Console Log)");
-                clearHashAndClose();
-            })
-            .catch((error) => {
-                console.error("Error thrown while sending text message: ", error);
-            });
-        } else {
-            console.warn("embeddedservice_bootstrap API not found. The message could not be sent.");
-            alert("API not found. Check console for details.");
-        }
+            // Check if the external service API is available
+            if (typeof embeddedservice_bootstrap !== 'undefined' && embeddedservice_bootstrap.utilAPI) {
+                
+                // Execute the required sendTextMessage function, sending only the messageText and an empty array for context
+                embeddedservice_bootstrap.utilAPI.sendTextMessage(
+                    messageText, 
+                    [] // Empty array for context, as requested
+                )
+                .then(() => {
+                    console.log("Successfully sent text message: " + messageText);	
+                    alert(`Sent to Assistant: "${messageText}"`);
+                })
+                .catch((error) => {
+                    console.error("Error thrown while sending text message: ", error);
+                    alert("Error sending message to Assistant. See console for details.");
+                });
+            } else {
+                console.warn("embeddedservice_bootstrap API not found. Message could not be sent.");
+                alert(`API not found. Message to send: "${messageText}"`);
+            }
+        });
     });
 });
