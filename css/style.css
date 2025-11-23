@@ -220,6 +220,107 @@ nav ul a:hover {
     background-color: #0056b3;
 }
 
+/* --- SHOPPING ASSISTANT STYLES --- */
+.assistant-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.assistant-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.assistant-header img {
+    margin-right: 0.75rem;
+    border-radius: 50%;
+    border: 1px solid #28a745;
+}
+
+.assistant-header h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.assistant-prompt {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.highlight-text {
+    color: #28a745; /* Use a highlight color, similar to the image */
+    font-weight: 500;
+}
+
+.query-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.query-button {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px; /* Pill shape */
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    color: #555;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.query-button:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+.sparkle-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+    margin-right: 0.3rem;
+    color: #28a745; /* Green sparkle color */
+}
+
+.assistant-input {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Rounded input box */
+    overflow: hidden;
+    padding-right: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.assistant-input input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+.assistant-input .send-button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
+}
+
+.assistant-input .send-button:hover {
+    color: #0056b3;
+}
+/* --- END SHOPPING ASSISTANT STYLES --- */
+
+
 /* Checkout Form */
 .checkout-form {
     background-color: #fff;
