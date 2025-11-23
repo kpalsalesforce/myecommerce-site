@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.close-button');
     const quickViewButtons = document.querySelectorAll('.quick-view-btn');
     const addToCartButton = document.querySelector('.modal-content .add-to-cart-btn'); // New: Select the Add to Cart button in the modal
+    const queryButton = document.querySelector('.query-button'); // query button
 
     // --- Core Modal Control Logic ---
 
@@ -185,4 +186,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Initial call: Check the hash when the page first loads (products.html#product-1)
     handleModalState();
+
+    // 6. Query button logic
+     queryButton.addEventListener('click', (event) => {
+        event.preventDefault();
+
+                 // Construct the AgentContext object
+        const agentContext = {
+            "name": "_AgentContext",
+            "value": {
+                "valueType": "StructuredValue",
+                "value": {
+                    // Update currentPage to reflect the product being viewed
+                    "currentPage": `Product Deatail`,
+                    "search": {
+                        "result": "result2",
+                        "filters": [
+                            "filter1",
+                            "filter2"
+                        ],
+                        "facets": [
+                            "facet1",
+                            "facet2"
+                        ]
+                    }
+                }
+            }
+        };
+
+        // Check if the external service API is available before calling
+        if (typeof embeddedservice_bootstrap !== 'undefined' && embeddedservice_bootstrap.utilAPI) {
+            
+            // Execute the required sendTextMessage function
+            embeddedservice_bootstrap.utilAPI.sendTextMessage(
+                `Is it dishwasher safe?`, 
+                [agentContext]
+            )
+            .then(() => {
+                console.log("Sent the dishwasher Sage message ");	
+                // Optional: Provide UI feedback (e.g., closing modal or confirmation message)
+           //     alert("Product details sent for assistance! (Check Console Log)");
+                clearHashAndClose();
+            })
+            .catch((error) => {
+                console.error("Error thrown while sending text message: ", error);
+            });
+        } else {
+            console.warn("embeddedservice_bootstrap API not found. The message could not be sent.");
+            alert("API not found. Check console for details.");
+        }
+    });
 });
