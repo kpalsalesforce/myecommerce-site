@@ -81,7 +81,7 @@
             <p>&copy; 2023 Cookware Co. All rights reserved.</p>
         </div>
     </footer>
-    <script src="js/script.js"></script>
+<!--    <script src="js/script.js"></script> -->
  <!-- SCRIPT FOR SHOPPING ASSISTANT INTEGRATION -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -95,6 +95,28 @@
                     // We use button.textContent and trim it to get the clean question.
                     const rawText = button.textContent || button.dataset.question;
                     const messageText = rawText.replace('✨', '').trim(); 
+
+                    const agentContext = {
+                            "name": "_AgentContext",
+                            "value": {
+                                "valueType": "StructuredValue",
+                                "value": {
+                                    // Update currentPage to reflect the product being viewed
+                                    "currentPage": `product-detail.html`,
+                                    "search": {
+                                        "result": "result2",
+                                        "filters": [
+                                            "filter1",
+                                            "filter2"
+                                        ],
+                                        "facets": [
+                                            "facet1",
+                                            "facet2"
+                                        ]
+                                    }
+                                }
+                            }
+                        };
                     
                     // Check if the external service API is available
                     if (typeof embeddedservice_bootstrap !== 'undefined' && embeddedservice_bootstrap.utilAPI) {
@@ -102,7 +124,7 @@
                         // Execute the required sendTextMessage function, sending only the messageText and an empty array for context
                         embeddedservice_bootstrap.utilAPI.sendTextMessage(
                             messageText, 
-                            [] // Empty array for context, as requested
+                            [agentContext]
                         )
                         .then(() => {
                             console.log("Successfully sent text message: " + messageText);	
