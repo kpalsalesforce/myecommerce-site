@@ -327,7 +327,7 @@ nav ul a:hover {
     position: relative; /* Useful for absolute positioning of elements inside, like a "close" button */
     display: flex;
     flex-direction: column; /* Stacks the header, message list, and input area vertically */
-    width: 600px; /* A typical width for a compact chat widget */
+    width: 650px; /* A typical width for a compact chat widget */
     min-height: 400px; /* Starts small when there are few messages */
     max-height: 800px; /* Crucial: Sets the maximum expansion height */
     
