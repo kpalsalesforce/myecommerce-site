@@ -320,7 +320,29 @@ nav ul a:hover {
 }
 /* --- END SHOPPING ASSISTANT STYLES --- */
 
+/* --- Inline Mode ---*/
 
+.chat-container {
+    /* 1. Positioning and Box Model */
+    position: relative; /* Useful for absolute positioning of elements inside, like a "close" button */
+    display: flex;
+    flex-direction: column; /* Stacks the header, message list, and input area vertically */
+    width: 300px; /* A typical width for a compact chat widget */
+    min-height: 50px; /* Starts small when there are few messages */
+    max-height: 400px; /* Crucial: Sets the maximum expansion height */
+    
+    /* 2. Expansion and Overflow */
+    overflow: hidden; /* Important for containing the scrolling message list */
+    transition: all 0.3s ease-in-out; /* Smooth transition for when the div expands */
+
+    /* 3. Appearance */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Soft, modern corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+}
+
+/* ----END of Inline Mode ---*/
 /* Checkout Form */
 .checkout-form {
     background-color: #fff;
