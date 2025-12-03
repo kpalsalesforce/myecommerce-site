@@ -25,7 +25,7 @@
     <main class="container">
         <div class="product-detail">
             <div class="product-detail-image">
-                <img src="https://via.placeholder.com/600x400/ff7f50/ffffff?text=Premium+Non-Stick+Pan" alt="Premium Non-Stick Pan">
+                <img src="https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202529/0082/img12xl.jpg" alt="Premium Non-Stick Pan">
             </div>
             <div class="product-detail-info">
                 <h1>Premium Non-Stick Pan</h1>
@@ -40,8 +40,38 @@
                     <li>Dishwasher safe (hand-wash recommended for longevity)</li>
                     <li>Available in 8-inch, 10-inch, and 12-inch sizes</li>
                 </ul>
-                <!-- We give this button an ID to be targeted by the script -->
-                <button id="detailAddToCart" class="add-to-cart-btn">Add to Cart</button>
+                <button class="add-to-cart-btn">Add to Cart</button>
+                
+                <!-- NEW SHOPPING ASSISTANT SECTION -->
+                <div class="assistant-section">
+                    <div class="assistant-header">
+                        <img src="https://cdn.spiffy.ai/other/assets/greenpan/greenpan-logo.svg" alt="Assistant Icon">
+                        <h3>Shopping Assistant</h3>
+                    </div>
+
+                    <p class="assistant-prompt">Want to know <span class="highlight-text">what are its dimensions?</span></p>
+
+                    <div class="query-buttons">
+                        <button class="query-button">
+                            <span class="sparkle-icon">✨</span> Is it dishwasher safe?
+                        </button>
+                        <button class="query-button">
+                            <span class="sparkle-icon">✨</span> What's the handle made of?
+                        </button>
+                        <button class="query-button">
+                            <span class="sparkle-icon">✨</span> How does it perform?
+                        </button>
+                    </div>
+            <!--         <div class="chat-container"></div> -->
+                    <div class="assistant-input"> 
+                        <input type="text" placeholder="Ask me anything...">
+                        <button class="send-button" onclick="launchChat()">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+               </div>  
+                <!-- END SHOPPING ASSISTANT SECTION -->
             </div>
         </div>
     </main>
@@ -51,32 +81,137 @@
             <p>&copy; 2023 Cookware Co. All rights reserved.</p>
         </div>
     </footer>
+<!--    <script src="js/script.js"></script> -->
+ <!-- SCRIPT FOR SHOPPING ASSISTANT INTEGRATION -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const queryButtons = document.querySelectorAll('.query-button');
 
-    <!-- MODAL HTML (Copied from products.html) -->
-    <div id="quickViewModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div class="modal-image">
-                <img id="modalProductImage" src="https://via.placeholder.com/300x200?text=Product+Image" alt="Product Image">
-            </div>
-            <div class="modal-details">
-                <h2 id="modalProductName">Product Name</h2>
-                <p class="price" id="modalProductPrice">$0.00</p>
-                <p id="modalProductDescription">Short product description goes here.</p>
+            queryButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
 
-                <div class="modal-options">
-                    <label for="modalProductSize">Size:</label>
-                    <select id="modalProductSize">
-                        <!-- Options populated by JS -->
-                    </select>
-                </div>
+                    // Extract the text of the button (remove the sparkle icon text if present)
+                    // We use button.textContent and trim it to get the clean question.
+                    const rawText = button.textContent || button.dataset.question;
+                    const messageText = rawText.replace('✨', '').trim(); 
 
-                <button class="add-to-cart-btn">Add to Cart</button>
-            </div>
-        </div>
-    </div>
+                    const agentContext = {
+                            "name": "_AgentContext",
+                            "value": {
+                                "valueType": "StructuredValue",
+                                "value": {
+                                    // Update currentPage to reflect the product being viewed
+                                    "currentPage": `product-detail.html`,
+                                    "search": {
+                                        "result": "result2",
+                                        "filters": [
+                                            "filter1",
+                                            "filter2"
+                                        ],
+                                        "facets": [
+                                            "facet1",
+                                            "facet2"
+                                        ]
+                                    }
+                                }
+                            }
+                        };
+                    
+                    // Check if the external service API is available
+                    if (typeof embeddedservice_bootstrap !== 'undefined' && embeddedservice_bootstrap.utilAPI) {
+                        
+                        // Execute the required sendTextMessage function, sending only the messageText and an empty array for context
+                        embeddedservice_bootstrap.utilAPI.sendTextMessage(
+     //                       messageText, 
+                            `I am interested in the GreenPan™ Reserve Pro Ceramic Nonstick Fry Pan Set. ${messageText}`,
+                            [agentContext]
+                        )
+                        .then(() => {
+                            console.log("Successfully sent text message: " + messageText);	
+           //                 alert(`Sent to Assistant: "${messageText}"`);
+                        })
+                        .catch((error) => {
+                            console.error("Error thrown while sending text message: ", error);
+                            alert("Error sending message to Assistant. See console for details.");
+                        });
+                    } else {
+                        console.warn("embeddedservice_bootstrap API not found. Message could not be sent.");
+                        alert(`API not found. Message to send: "${messageText}"`);
+                    }
+                });
+            });
+        });
+    </script>
+<!--    
+    <script type='text/javascript'>
+    function initEmbeddedMessaging() {
+        try {
+            embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+     //       embeddedservice_bootstrap.settings.displayMode = 'inline';
+    //        embeddedservice_bootstrap.settings.headerEnabled =false;
+    //        const myElement = document.querySelector('.chat-container');
+    //        embeddedservice_bootstrap.settings.targetElement = myElement;
+            embeddedservice_bootstrap.init(
+                '00DHp00000HCMgd',
+                'Agent_Web_Deployment',
+                'https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342',
+                {
+                    scrt2URL: 'https://storm-e18cb78cc5e405.my.salesforce-scrt.com'
+                }
+            );
+            
 
-    <!-- Load the common script -->
-    <script src="js/script.js"></script>
+        } catch (err) {
+            console.error('Error loading Embedded Messaging: ', err);
+        }
+    };
+</script>
+<script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+-->
+    
+<script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+			embeddedservice_bootstrap.init(
+				'00DWD000005bkp4',
+				'Sous_Chef_Agent_Olive',
+				'https://wsgc--genesys.sandbox.my.site.com/ESWSousChefAgentOlive1759413331699',
+				{
+					scrt2URL: 'https://wsgc--genesys.sandbox.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://wsgc--genesys.sandbox.my.site.com/ESWSousChefAgentOlive1759413331699/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+
+<script>
+function launchChat() {
+    embeddedservice_bootstrap.utilAPI.launchChat()
+        .then(() => {
+            // Success handler used to perform actions
+            // when the chat client launches successfully.
+            // For example, create a method that disables the launch chat button.
+            disableLaunchChatButton();
+        }).catch(() => {
+            // Error handler used to perform actions
+            // if the chat client fails to launch.
+            // For example, create a method that hides the launch chat button.
+            hideLaunchChatButton();
+        }).finally(() => {
+            // Finally handler used to perform any clean-up actions
+            // regardless of whether the chat client launches successfully or not.
+            // For example, create a method that logs the user’s attempt to chat.
+            logEndUserAttemptToChat();
+        });
+
+}
+</script>
 </body>
 </html>
