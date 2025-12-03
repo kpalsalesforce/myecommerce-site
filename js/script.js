@@ -103,16 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. Product Detail Page: Add to Cart button sets the hash for Product ID 1.
-    if (detailAddToCartButton) {
-        detailAddToCartButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            // Hardcode product ID 1, as this page is for the Non-Stick Pan demo
-            window.location.hash = 'product-1'; 
-        });
-    }
-    
-    // 3. Add to Cart Button Click Handler (Custom function call)
+    // 2. Add to Cart Button Click Handler (Custom function call)
     addToCartButton.addEventListener('click', (event) => {
         event.preventDefault();
 
