@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Premium Non-Stick Pan',
             price: 69.99,
             description: 'A durable non-stick pan, perfect for everyday cooking. Even heat distribution for optimal results.',
-            image: 'https://assets.wsimgs.com/wsimgs/rk/images/dp/wcm/202529/0082/img12xl.jpg',
+            image: 'https://via.placeholder.com/300x200/ff7f50/ffffff?text=Pan+Quick+View',
             sizes: ['8-inch', '10-inch', '12-inch']
         },
         '2': {
@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const quickViewModal = document.getElementById('quickViewModal');
     const closeButton = document.querySelector('.close-button');
     const quickViewButtons = document.querySelectorAll('.quick-view-btn');
-    const addToCartButton = document.querySelector('.modal-content .add-to-cart-btn'); // New: Select the Add to Cart button in the modal
+    const detailAddToCartButton = document.getElementById('detailAddToCart'); // New: Add to Cart on Detail Page
+    const modalAddToCartButton = document.querySelector('.modal-content .add-to-cart-btn'); // Add to Cart button inside the modal
 
     // --- Core Modal Control Logic ---
 
@@ -79,8 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     sizeSelect.appendChild(option);
                 });
 
-                // Store current product ID on the button for use in sendTextMessage
-                addToCartButton.dataset.currentProductId = productId;
+                // Store current product ID on the modal button
+                modalAddToCartButton.dataset.currentProductId = productId;
 
                 quickViewModal.style.display = 'flex';
                 return;
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Handlers ---
 
-    // 1. Button click sets the hash, which triggers the hashchange listener.
+    // 1. Product Listing Page: Quick View buttons set the hash.
     quickViewButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
@@ -103,12 +104,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 2. Add to Cart Button Click Handler (Custom function call)
-    addToCartButton.addEventListener('click', (event) => {
+    // 2. Product Detail Page: Add to Cart button sets the hash for Product ID 1.
+    if (detailAddToCartButton) {
+        detailAddToCartButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            // Hardcode product ID 1, as this page is for the Non-Stick Pan demo
+            window.location.hash = 'product-1'; 
+        });
+    }
+
+
+    // 3. Modal's Add to Cart Button Click Handler (External Service Call)
+    modalAddToCartButton.addEventListener('click', (event) => {
         event.preventDefault();
 
         // Get current product details from the modal UI
-        const productId = addToCartButton.dataset.currentProductId;
+        const productId = modalAddToCartButton.dataset.currentProductId;
         const productName = document.getElementById('modalProductName').textContent;
         const productSize = document.getElementById('modalProductSize').value;
 
@@ -118,13 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
             "value": {
                 "valueType": "StructuredValue",
                 "value": {
-                    // Update currentPage to reflect the product being viewed
-                    "currentPage": `products.html#product-${productId} (${productName})`,
+                    "currentPage": `Product Detail: ${productName} (ID: ${productId})`,
                     "search": {
-                        "result": "result2",
+                        "result": "modal-quick-view-opened",
                         "filters": [
-                            "filter1",
-                            "filter2"
+                            "size:" + productSize
                         ],
                         "facets": [
                             "facet1",
@@ -146,13 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Execute the required sendTextMessage function
             embeddedservice_bootstrap.utilAPI.sendTextMessage(
-                `I am interested in the ${productName} (Size: ${productSize}). Can you recommend accessories for this?`, 
+                `I added the ${productName} (Size: ${productSize}) to my cart and need assistance with my order.`, 
                 [agentContext]
             )
             .then(() => {
                 console.log("Successfully sent text message for product ID: " + productId);	
-                // Optional: Provide UI feedback (e.g., closing modal or confirmation message)
-           //     alert("Product details sent for assistance! (Check Console Log)");
+                alert(`Added ${productName} to cart and notified assistance!`);
                 clearHashAndClose();
             })
             .catch((error) => {
@@ -160,15 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             console.warn("embeddedservice_bootstrap API not found. The message could not be sent.");
-            alert("API not found. Check console for details.");
+            alert("Added to Cart! (API Integration Placeholder) Check console for details.");
+            clearHashAndClose();
         }
     });
 
-    // 3. Close button or background click clears the hash, which triggers the hashchange listener.
+    // 4. Close button or background click clears the hash, which triggers the hashchange listener.
     function clearHashAndClose() {
         // Clear the hash without causing a page reload
         history.pushState("", document.title, window.location.pathname + window.location.search);
-        // Explicitly call the handler just in case the hashchange event doesn't fire immediately
         handleModalState();
     }
     
@@ -180,44 +188,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 4. Main hash change listener: Re-run the core logic whenever the hash changes (including back button usage).
+    // 5. Main hash change listener: Re-run the core logic whenever the hash changes (including back button usage).
     window.addEventListener('hashchange', handleModalState);
 
-    // 5. Initial call: Check the hash when the page first loads (products.html#product-1)
+    // 6. Initial call: Check the hash when the page first loads
     handleModalState();
-
-    // 6. Query button logic
-    const queryButtons = document.querySelectorAll('.query-button');
-
-    queryButtons.forEach(button => {
-    button.addEventListener('click', (event) => {
-            event.preventDefault();
-
-            // Extract the text of the button (remove the sparkle icon text if present)
-            // We use button.textContent and trim it to get the clean question.
-            const rawText = button.textContent || button.dataset.question;
-            const messageText = rawText.replace('✨', '').trim(); 
-            
-            // Check if the external service API is available
-            if (typeof embeddedservice_bootstrap !== 'undefined' && embeddedservice_bootstrap.utilAPI) {
-                
-                // Execute the required sendTextMessage function, sending only the messageText and an empty array for context
-                embeddedservice_bootstrap.utilAPI.sendTextMessage(
-                    messageText, 
-                    [] // Empty array for context, as requested
-                )
-                .then(() => {
-                    console.log("Successfully sent text message: " + messageText);	
-                    alert(`Sent to Assistant: "${messageText}"`);
-                })
-                .catch((error) => {
-                    console.error("Error thrown while sending text message: ", error);
-                    alert("Error sending message to Assistant. See console for details.");
-                });
-            } else {
-                console.warn("embeddedservice_bootstrap API not found. Message could not be sent.");
-                alert(`API not found. Message to send: "${messageText}"`);
-            }
-        });
-    });
 });
