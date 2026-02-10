@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Our Premium Cookware</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Optional: Google Fonts for 'Inter' --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Cookware Co.</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id="chat-container"></div>
+   
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Cookware Co. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+
+
+<script src="js/script.js"></script>
+
+<script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+            embeddedservice_bootstrap.settings.displayMode = 'inline';
+            embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
+			embeddedservice_bootstrap.init(
+				'00DWD000005bkp4',
+				'Sous_Chef_Agent_Olive',
+				'https://wsgc--genesys.sandbox.my.site.com/ESWSousChefAgentOlive1759413331699',
+				{
+					scrt2URL: 'https://wsgc--genesys.sandbox.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://wsgc--genesys.sandbox.my.site.com/ESWSousChefAgentOlive1759413331699/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+<script>
+    function launchChat() {
+        embeddedservice_bootstrap.utilAPI.launchChat()
+            .then(() => {
+                // Success handler used to perform actions
+                // when the chat client launches successfully.
+                // For example, create a method that disables the launch chat button.
+                disableLaunchChatButton();
+            }).catch(() => {
+                // Error handler used to perform actions
+                // if the chat client fails to launch.
+                // For example, create a method that hides the launch chat button.
+                hideLaunchChatButton();
+            }).finally(() => {
+                // Finally handler used to perform any clean-up actions
+                // regardless of whether the chat client launches successfully or not.
+                // For example, create a method that logs the user’s attempt to chat.
+                logEndUserAttemptToChat();
+            });
+
+    }
+</script>
+
+</html>
