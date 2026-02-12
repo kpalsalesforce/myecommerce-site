@@ -45,6 +45,7 @@
 
 
 <script src="js/script.js"></script>
+<!--
 <script type='text/javascript'>
     let oliveReadyPromise, oliveReadyPromiseResolve;
     let isNewConversation = false;
@@ -85,8 +86,8 @@
 	function initEmbeddedMessaging() {
     try {
       embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
- //     embeddedservice_bootstrap.settings.displayMode = 'inline';
- //     embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
+      embeddedservice_bootstrap.settings.displayMode = 'inline';
+      embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
       embeddedservice_bootstrap.init(
         '00DWe000004bR42',
         'Sous_Chef_Agent_Olive',
@@ -102,7 +103,7 @@
 </script>
 <script type='text/javascript' src='https://wsgc--afqa.sandbox.my.site.com/ESWSousChefAgentOlive1760167198695/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
-<!--
+
 	// AFDevPro
 <script type='text/javascript'>
     let oliveReadyPromise, oliveReadyPromiseResolve;
@@ -162,14 +163,49 @@
 <script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/ESWSousChefAgentOlive1760167198695/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
 -->	
-<!--	
+	
 // StormOrg
 <script type='text/javascript'>
+	let oliveReadyPromise, oliveReadyPromiseResolve;
+    let isNewConversation = false;
+	 window.addEventListener("onEmbeddedMessagingReady", () => {
+        oliveReadyPromise = new Promise((resolve) => {
+            oliveReadyPromiseResolve = resolve;
+        });
+    });
+
+    window.addEventListener("onEmbeddedMessagingConversationStarted", () => {
+        isNewConversation = true;
+    });
+
+    window.addEventListener("onEmbeddedMessagingConversationOpened", () => {
+        if (!isNewConversation) {
+            resolveOliveReadyPromise();
+        }
+    });
+
+    window.addEventListener("onEmbeddedMessagingFirstBotMessageSent", () => {
+        resolveOliveReadyPromise();
+    });
+
+	function resolveOliveReadyPromise() {
+        if (oliveReadyPromiseResolve) {
+            oliveReadyPromiseResolve();
+        }
+    }
+
+	function sendNudge() {
+        const nudgeText = document.getElementById("nudgeInput").value;
+        embeddedservice_bootstrap.utilAPI.launchChat();
+        oliveReadyPromise.then(() => {
+            embeddedservice_bootstrap.utilAPI.sendTextMessage(nudgeText);
+        });
+	}
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-            embeddedservice_bootstrap.settings.displayMode = 'inline';
-            embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
+        //    embeddedservice_bootstrap.settings.displayMode = 'inline';
+        //    embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
 			embeddedservice_bootstrap.init(
 				'00DWD000005bkp4',
 				'Sous_Chef_Agent_Olive',
@@ -184,7 +220,7 @@
 	};
 </script>
 <script type='text/javascript' src='https://wsgc--genesys.sandbox.my.site.com/ESWSousChefAgentOlive1759413331699/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
--->
+
 <script>
     function launchChat() {
         embeddedservice_bootstrap.utilAPI.launchChat()
