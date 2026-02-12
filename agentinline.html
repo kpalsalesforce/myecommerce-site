@@ -52,7 +52,7 @@ function initEmbeddedMessaging() {
     try {
       embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 	  embeddedservice_bootstrap.settings.displayMode = 'inline';
-      embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
+
       embeddedservice_bootstrap.init(
         '00DWe000004bR42',
         'Sous_Chef_Agent_Olive',
@@ -61,7 +61,7 @@ function initEmbeddedMessaging() {
           scrt2URL: 'https://wsgc--afqa.sandbox.my.salesforce-scrt.com'
         }  
       );
-	  embeddedservice_bootstrap.settings.displayMode = 'inline';
+
       embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
     } catch (err) {
       console.error('Error loading Embedded Messaging: ', err);
