@@ -46,9 +46,45 @@
 
 <script src="js/script.js"></script>
 //AFQA
+	<!--
 <script type='text/javascript'>
+    let oliveReadyPromise, oliveReadyPromiseResolve;
+    let isNewConversation = false;
+	 window.addEventListener("onEmbeddedMessagingReady", () => {
+        oliveReadyPromise = new Promise((resolve) => {
+            oliveReadyPromiseResolve = resolve;
+        });
+    });
 
+    window.addEventListener("onEmbeddedMessagingConversationStarted", () => {
+        isNewConversation = true;
+    });
+
+    window.addEventListener("onEmbeddedMessagingConversationOpened", () => {
+        if (!isNewConversation) {
+            resolveOliveReadyPromise();
+        }
+    });
+
+    window.addEventListener("onEmbeddedMessagingFirstBotMessageSent", () => {
+        resolveOliveReadyPromise();
+    });
+
+	function resolveOliveReadyPromise() {
+        if (oliveReadyPromiseResolve) {
+            oliveReadyPromiseResolve();
+        }
+    }
+
+	function sendNudge() {
+        const nudgeText = document.getElementById("nudgeInput").value;
+        embeddedservice_bootstrap.utilAPI.launchChat();
+        oliveReadyPromise.then(() => {
+            embeddedservice_bootstrap.utilAPI.sendTextMessage(nudgeText);
+        });
+	}
 function initEmbeddedMessaging() {
+	
     try {
       embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 	  embeddedservice_bootstrap.settings.displayMode = 'inline';
@@ -68,7 +104,7 @@ function initEmbeddedMessaging() {
 </script>
 <script type='text/javascript' src='https://wsgc--afqa.sandbox.my.site.com/ESWSousChefAgentOlive1760167198695/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
-<!--
+-->
 	// AFDevPro
 <script type='text/javascript'>
     let oliveReadyPromise, oliveReadyPromiseResolve;
@@ -126,7 +162,7 @@ function initEmbeddedMessaging() {
 	};
 </script>
 <script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/ESWSousChefAgentOlive1760167198695/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-
+<!--
 // StormOrg
 
 	
