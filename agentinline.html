@@ -45,8 +45,9 @@
 
 
 <script src="js/script.js"></script>
-//AFQA
-	<!--
+<!--
+	//AFQA
+
 <script type='text/javascript'>
     let oliveReadyPromise, oliveReadyPromiseResolve;
     let isNewConversation = false;
@@ -104,7 +105,7 @@ function initEmbeddedMessaging() {
 </script>
 <script type='text/javascript' src='https://wsgc--afqa.sandbox.my.site.com/ESWSousChefAgentOlive1760167198695/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
--->
+
 	// AFDevPro
 <script type='text/javascript'>
     let oliveReadyPromise, oliveReadyPromiseResolve;
@@ -162,7 +163,7 @@ function initEmbeddedMessaging() {
 	};
 </script>
 <script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/ESWSousChefAgentOlive1760167198695/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-<!--
+-->
 // StormOrg
 
 	
@@ -206,6 +207,7 @@ function initEmbeddedMessaging() {
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+			embeddedservice_bootstrap.settings.shouldMinimizeWindowOnNewTab = true
         //    embeddedservice_bootstrap.settings.displayMode = 'inline';
         //    embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
 			embeddedservice_bootstrap.init(
@@ -222,7 +224,7 @@ function initEmbeddedMessaging() {
 	};
 </script>
 <script type='text/javascript' src='https://wsgc--genesys.sandbox.my.site.com/ESWSousChefAgentOlive1759413331699/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
--->	
+
 <script>
     function launchChat() {
         embeddedservice_bootstrap.utilAPI.launchChat()
