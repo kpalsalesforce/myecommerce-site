@@ -208,7 +208,8 @@ function initEmbeddedMessaging() {
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-
+            embeddedservice_bootstrap.settings.displayMode = 'inline';
+            embeddedservice_bootstrap.settings.targetElement = document.getElementById('chat-container');
 			embeddedservice_bootstrap.init(
 				'00DHp00000HCMgd',
 				'Agent_Web_Deployment',
