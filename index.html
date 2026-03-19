@@ -124,6 +124,12 @@
 				{
 					scrt2URL: 'https://storm-e18cb78cc5e405.my.salesforce-scrt.com'
 				}
+			window.addEventListener("onEmbeddedMessagingWindowMinimized", (event) => {
+                    console.log("MIAW Agentforce window was minimized!");
+                    
+                    // Add your custom logic here, for example:
+                     alert("Don't go! We are still here to help.");
+                });
 			);
 		} catch (err) {
 			console.error('Error loading Embedded Messaging: ', err);
