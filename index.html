@@ -137,7 +137,12 @@
                     // Add your custom logic here, for example:
                      alert("Don't go! We are still here to help.");
                 });
-</script>
+
+			    window.addEventListener("onAddToCartClick", (event) => {
+		 		 console.log("Received the onAddToCartClick event...");
+		           console.log("Event detail: ", event.detail); // prints {productId: "745-324"}
+		        });
+	</script>
 <script type='text/javascript' src='https://storm-e18cb78cc5e405.my.site.com/ESWAgentWebDeployment1740622943342/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 <!--
 <script type='text/javascript'>
