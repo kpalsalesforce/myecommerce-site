@@ -45,6 +45,29 @@
 
 
 <script src="js/script.js"></script>
+
+	//AFDevPro
+	<script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+			embeddedservice_bootstrap.init(
+				'00DWE00000HRZaz',
+				'NGA_Test_Mark_Graham_Channel',
+				'https://wsgc--afdevpro.sandbox.my.site.com/ESWNGATestMarkGrahamC1775145377318',
+				{
+					scrt2URL: 'https://wsgc--afdevpro.sandbox.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/ESWNGATestMarkGrahamC1775145377318/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+	
+	
 <!--
 	//AFQA
 
@@ -163,7 +186,7 @@ function initEmbeddedMessaging() {
 	};
 </script>
 <script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/ESWSousChefAgentOlive1760167198695/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
--->
+
 // StormOrg
 
 	
@@ -224,7 +247,7 @@ function initEmbeddedMessaging() {
 	};
 </script>
 <script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/ESWSousChefAgentOlive1760167198695/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-
+-->
 <script>
     function launchChat() {
         embeddedservice_bootstrap.utilAPI.launchChat()
@@ -246,6 +269,18 @@ function initEmbeddedMessaging() {
             });
 
     }
+
+	window.addEventListener("onEmbeddedMessagingReady", () => {
+				embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+				'brandCode': 'MG',
+				'Customer_Identifier': ''
+				'Device_Type':'Desktop'
+				'Market_Code':'USA'
+		  		'sourceUrl':'https://www.markandgraham.com/'
+		 		'Source_Type':
+				// Add other fields as needed
+				});
+	});
 </script>
 
 </html>
