@@ -106,16 +106,6 @@
 			console.error('Error loading Embedded Messaging: ', err);
 		}
 	};
-	window.addEventListener("onEmbeddedMessagingReady", () => {
-	    console.log("Received the onEmbeddedMessagingReady event…");
-	
-	    // Send data to Salesforce
-	    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({"brandCode" : "PK",
-	        "Market_Code" : "USA"});
-	
-	    // Remove any items from the previous list that you don't want to send
-	    embeddedservice_bootstrap.prechatAPI.removeHiddenPrechatFields(["Customer_ID"]);
-    });
 </script>
 <script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/PBKidsHavenvf/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 <!--	
