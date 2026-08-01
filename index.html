@@ -93,6 +93,28 @@
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+			embeddedservice_bootstrap.init(
+				'00DWE00000HRZaz',
+				'Pottery_Barn_Product_Explore',
+				'https://wsgc--afdevpro.sandbox.my.site.com/ESWNGATestMarkGrahamC1775145377318',
+				{
+					scrt2URL: 'https://wsgc--afdevpro.sandbox.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/ESWNGATestMarkGrahamC1775145377318/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+	
+<!--	
+<script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
              window.addEventListener("onEmbeddedMessagingReady", () => {			
 			    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({"brandCode" : "PK",
 			        "Market_Code" : "USA"});
@@ -111,7 +133,10 @@
 	};
 </script>
 <script type='text/javascript' src='https://wsgc--afdevpro.sandbox.my.site.com/PBKidsHavenvf/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-<!--	
+
+
+	
+
 <script src="js/script.js"></script>	
 <script type='text/javascript'>
 	function initEmbeddedMessaging() {
